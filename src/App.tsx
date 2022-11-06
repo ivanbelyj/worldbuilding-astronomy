@@ -1,24 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Header } from "./components/Header";
+import { ParametersGroupComponent } from "./components/ParametersGroupComponent";
+import { getStarParametersGroup } from "./data/StarParametersGroup";
+import { ParametersGroup } from "./models/ParametersGroup";
 
 function App() {
+  const starParamsGroup: ParametersGroup = getStarParametersGroup();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="fixed top-0 left-0 right-0 bottom-0 bg-paleDark">
+      <Header title="Звезда" />
+      <ParametersGroupComponent parametersGroup={starParamsGroup} />
+
+      <Header title="Планета" />
     </div>
   );
 }
