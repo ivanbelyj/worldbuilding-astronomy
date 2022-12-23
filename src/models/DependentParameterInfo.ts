@@ -13,6 +13,9 @@ export class DependentParameterInfo extends ParameterInfo {
   // Используется для обеспечения правильного порядка вычислений.
   // Массив должен быть согласован с функцией вычисления параметра (calc)
   private _dependencies: string[];
+  public get dependencies(): string[] {
+    return this._dependencies;
+  }
 
   constructor(
     id: string,

@@ -12,8 +12,12 @@ export class ParametersGroup {
 
   private _paramIdAndInfo: Map<string, ParameterInfo>;
 
-  public getParamInfoById(id: string): ParameterInfo | undefined {
-    return this._paramIdAndInfo.get(id);
+  public getParamInfoById(id: string): ParameterInfo {
+    const res = this._paramIdAndInfo.get(id);
+    if (!res)
+      throw new Error("There is no parameters with such an id in the group");
+
+    return res;
   }
 
   constructor(realWorldTitle: string, parameters: ParameterInfo[]) {

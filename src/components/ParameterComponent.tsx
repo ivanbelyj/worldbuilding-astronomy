@@ -1,51 +1,60 @@
+import { ParameterInfo } from "../models/ParameterInfo";
 import { TextInput } from "./TextInput";
 
 interface IParameterComponentProps {
-  title: string;
-  units: string;
+  // title: string;
+  // units: string;
+  // realWorldValue: number;
+  parameter: ParameterInfo;
   realWorldTitle: string;
-  realWorldValue: number;
   value?: number;
-  onChange?: (newValue?: number) => void;
+  onChange?: (param: ParameterInfo, newValue?: number) => void;
+  readOnly?: boolean;
 }
 
 export function ParameterComponent({
-  title,
-  units,
+  // title,
+  // units,
+  // realWorldValue,
+  parameter,
   realWorldTitle,
-  realWorldValue,
   value,
   onChange,
+  readOnly,
 }: IParameterComponentProps) {
-  // const [value, setValue] = useState<number>();
   const handleChange = (newValue?: number) => {
-    if (onChange) onChange(newValue);
-    // setValue(newValue);
+    if (onChange) onChange(parameter, newValue);
   };
 
-  const relativeToRealWorld = (value: number) => {
-    return (value / realWorldValue).toPrecision(4);
-  };
+  // const relativeToRealWorld = (value: number) => {
+  //   return (value / parameter.referenceValue).toPrecision(4);
+  // };
 
   const shouldBeEmptyString = (value?: number) => {
     if (!value && value !== 0) return true;
   };
 
   return (
-    <div>
-      <TextInput
-        title={title}
-        units={units}
-        onChange={handleChange}
-        value={shouldBeEmptyString(value) ? "" : value}
-      />
-      <TextInput
-        title={realWorldTitle}
-        units="раз"
-        value={
-          shouldBeEmptyString(value) || !value ? "" : relativeToRealWorld(value)
-        }
-      />
+    <div className="mb-1">
+      {/* <div className="inline-block mr-1">
+        <TextInput
+          title={parameter.title}
+          units={parameter.units}
+          // onChange={handleChange}
+          value={shouldBeEmptyString(value) ? "" : value}
+          readOnly={readOnly}
+        />
+      </div> */}
+
+      <div className="inline-block">
+        <TextInput
+          title={parameter.title}
+          units={parameter.units}
+          onChange={handleChange}
+          value={shouldBeEmptyString(value) || !value ? "" : value}
+          readOnly={readOnly}
+        />
+      </div>
     </div>
   );
 }
